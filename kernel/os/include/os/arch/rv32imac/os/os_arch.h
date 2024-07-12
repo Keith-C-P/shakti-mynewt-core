@@ -21,7 +21,7 @@
 #define _OS_ARCH_RV32IMAC_H
 
 #include <stdint.h>
-#include "mcu/platform.h"
+#include "mcu/fe310.h"
 
 #ifdef __cplusplus
 extern "C" {
