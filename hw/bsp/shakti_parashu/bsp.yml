@@ -19,7 +19,7 @@
 
 ### Entries containing `XXX` need to be replaced with actual values.
 
-bsp.arch: rv32imac
+bsp.arch: shakti
 bsp.compiler: compiler/riscv64
 bsp.linkerscript:
     - 'hw/bsp/shakti_parashu/app-shakti_parashu.ld'

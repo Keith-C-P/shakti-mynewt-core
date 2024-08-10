@@ -28,8 +28,8 @@ pkg.keywords:
     - shakti
     - riscv
 
-pkg.cflags: -march=rv32imac -mabi=ilp32
-
 pkg.deps:
     - '@apache-mynewt-core/hw/mcu/shakti/parashu'
     - '@apache-mynewt-core/libc/baselibc'
+
+pkg.cflags: -march=rv32imac -mabi=ilp32
