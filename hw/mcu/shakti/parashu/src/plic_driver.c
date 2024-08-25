@@ -27,13 +27,13 @@
   setup each plic registers, isr routine and plic interrupt handler are here.
  */
 
-#include "pwm_driver.h"
-#include "plic_driver.h"
-#include "platform.h"
-#include "log.h"
+#include "mcu/pwm_driver.h"
+#include "mcu/plic_driver.h"
+#include "mcu/platform.h"
+#include "mcu/log.h"
 #include "stddef.h"
-#include "gpio.h"
-#include "utils.h"
+#include "mcu/gpio.h"
+#include "mcu/utils.h"
 
 /*
    Global interrupt data maintenance structure

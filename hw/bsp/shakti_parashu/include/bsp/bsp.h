@@ -161,3 +161,5 @@ platform.h - header file for parashu E class SoC on artix7_100t
 #define GPIO_COUNT  0x20
 
 #endif
+
+#define LED_BLINK_PIN GPIO16

@@ -27,9 +27,9 @@
   and receive over UART interface.
  */
 
-#include "uart.h"
-#include "gpio.h"
-#include "utils.h"
+#include "mcu/uart.h"
+#include "mcu/gpio.h"
+#include "mcu/utils.h"
 
 uart_struct *uart_instance[MAX_UART_COUNT];
 

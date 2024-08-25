@@ -26,8 +26,8 @@
 @detail This file contains implementation of different log levels.
 */ 
 
-#include "log.h"
-#include "utils.h"
+#include "mcu/log.h"
+#include "mcu/utils.h"
 
 /*Use -D compiler flag to set the LOG_LEVEL; default value is 1*/
 #ifndef LOG_LEVEL

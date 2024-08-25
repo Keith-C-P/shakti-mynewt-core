@@ -26,9 +26,9 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 @detail the device driver for the pwm module which is used to change the frequency, period and duty registers 
 */
 
-#include "pwm_driver.h"
-#include "platform.h"
-#include "log.h"
+#include "mcu/pwm_driver.h"
+#include "mcu/platform.h"
+#include "mcu/log.h"
 
 #define PERIOD_REGISTER_MAX     0x0000FFFF 
 #define DUTY_REGISTER_MAX       0x0000FFFF 

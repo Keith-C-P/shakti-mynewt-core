@@ -26,8 +26,8 @@
 @detail This file contains Trap handler routines.
 */
 
-#include "traps.h"
-#include "log.h"
+#include "mcu/traps.h"
+#include "mcu/log.h"
 
 mtrap_fptr_t mcause_trap_table[MAX_TRAP_VALUE];
 mtrap_fptr_t mcause_interrupt_table[MAX_INTERRUPT_VALUE];

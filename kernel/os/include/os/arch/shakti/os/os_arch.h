@@ -21,7 +21,7 @@
 #define _OS_ARCH_RV32IMAC_H
 
 #include <stdint.h>
-#include "mcu/shakti/"
+#include "mcu/platform.h"
 
 #ifdef __cplusplus
 extern "C" {
