@@ -34,7 +34,6 @@ extern "C" {
 
 #include <inttypes.h>
 
-
 /**
  * Function prototype for UART driver to ask for more data to send.
  * Returns -1 if no more data is available for TX.
@@ -144,7 +143,6 @@ void hal_uart_blocking_tx(int uart, uint8_t byte);
 #ifdef __cplusplus
 }
 #endif
-
 
 #endif /* H_HAL_UART_H_ */
 
