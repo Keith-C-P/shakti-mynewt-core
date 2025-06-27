@@ -1,5 +1,5 @@
 /*
-platform.h - header file for vajra C class SoC on artix7_100t
+platform.h - header file for parashu E class SoC on artix7_100t
 
 * Name of Author  : Sathya Narayanan N
 * Email ID        : sathya281@gmail.com
@@ -19,7 +19,7 @@ platform.h - header file for vajra C class SoC on artix7_100t
  You should have received a copy of the GNU General Public License
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
-/*********c-rv64imacsu-100t*********
+/***********e-rv32imac-100t******
  SPI   * 2
  GPIO  * 32
  UART  * 3
@@ -30,15 +30,19 @@ platform.h - header file for vajra C class SoC on artix7_100t
  DDR   : 256MB
  Boot
  PWM   * 6
- pinmux
-************************************/
+ pinmux 
+*********************************/
 
 #ifndef PLATFORM_H
 #define PLATFORM_H
 
 /*
- *@brief RISCV - C CLASS SOC Memory mapping
+ *@brief RISCV - E CLASS SOC Memory mapping
  */
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 /*! Core Local Interruptor CLINT */
 #define CLINT_BASE 0x020000000
@@ -81,9 +85,6 @@ platform.h - header file for vajra C class SoC on artix7_100t
 
 /*! Xilinx Analog to Digital converter */
 #define XADC_BASE_ADDRESS 0x00041000
-
-/*!Ethernet */
-#define ETHERNET_BASE 0x00044000
 
 /*! pinmux*/
 #define PINMUX_START 0x41500 
@@ -162,5 +163,12 @@ platform.h - header file for vajra C class SoC on artix7_100t
 #define GPIO30 (1 << 30)
 #define GPIO31 (1 << 31)
 #define GPIO_COUNT  0x20
+
+#define PLIC_NUM_INTERRUPTS 52
+#define PLIC_NUM_PRIORITIES 7
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

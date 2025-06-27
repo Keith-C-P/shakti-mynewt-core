@@ -17,7 +17,7 @@
 # under the License.
 #
 
-bsp.name: "shakti_vajra"
+bsp.name: "shakti_parshu"
 bsp.url: https://shakti.org.in/
 bsp.maker: "RISE Lab"
 bsp.arch: shakti
@@ -25,8 +25,8 @@ bsp.compiler: compiler/riscv64-unknown-elf-shakti
 
 # TODO write the linky scripts
 bsp.linkerscript:
-    - "hw/bsp/shakti_vajra/vajra.ld"
-    - "hw/bsp/shakti_vajra/vajra_boot.ld"
+    - "hw/bsp/shakti_parashu/parashu.ld"
+    - "hw/bsp/shakti_parashu/parashu_boot.ld"
 bsp.downloadscript: "hw/bsp/hifive1/hifive1_download.sh"
 bsp.debugscript: "hw/bsp/hifive1/hifive1_debug.sh"
 

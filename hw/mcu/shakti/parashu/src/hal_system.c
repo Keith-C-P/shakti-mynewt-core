@@ -53,28 +53,45 @@ enum hal_reset_reason {
     HAL_RESET_OTHER = 256,
 };
 
+// enum hal_reset_reason hal_reset_cause(void)
+
+
+
+
 /**
  * System reset.
  */
-void hal_system_reset(void) __attribute((noreturn));
+void hal_system_reset(void)
+{
+  
+} 
 
 /**
  * Called by bootloader to start loaded program.
  */
-void hal_system_start(void *img_start) __attribute((noreturn));
+void hal_system_start(void *img_start)
+{
+    __attribute__((noreturn)) void (*fn)(void) = img_start;
+
+    /* Jump to image. */
+    fn();
+}
 
 /**
  * Called by split app loader to start the app program.
  */
-void hal_system_restart(void *img_start) __attribute((noreturn));
+void hal_system_restart(void *img_start)
+{
+
+}
 
 /**
  * Returns non-zero if there is a HW debugger attached.
  */
-int hal_debugger_connected(void);
-
-
-enum hal_reset_reason hal_reset_cause(void);
+int hal_debugger_connected(void)
+{
+  return 1;
+}
 
 const char *hal_reset_cause_str(void);
 

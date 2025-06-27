@@ -32,6 +32,7 @@ Disable Xip for Aardonyx
 
 #include "traps.h"
 #include "clint.h"
+#include "plic.h"
 #include "mcu/platform.h"
 #include "defines.h"
 #include "hal/hal_uart.h"
@@ -75,7 +76,7 @@ static void trap_init(void)
 	mcause_interrupt_table[USER_EXT_INTERRUPT]       = default_handler;
 	mcause_interrupt_table[SUPERVISOR_EXT_INTERRUPT] = default_handler;
 	mcause_interrupt_table[RESERVED_INTERRUPT2]      = default_handler;
-	mcause_interrupt_table[MACH_EXTERNAL_INTERRUPT]  = 0; //XXX CHANGE TO mach_plic_handler when implemented
+	mcause_interrupt_table[MACH_EXTERNAL_INTERRUPT]  = mach_plic_handler; //XXX CHANGE TO mach_plic_handler when implemented
 	mcause_interrupt_table[RESERVED_INTERRUPT3]      = default_handler;
 	mcause_interrupt_table[RESERVED_INTERRUPT4]      = default_handler;
 	mcause_interrupt_table[RESERVED_INTERRUPT5]      = default_handler;

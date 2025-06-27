@@ -26,7 +26,7 @@
 #include <hal/hal_flash_int.h>
 #include <hal/hal_flash.h>
 #include <hal/hal_bsp.h>
-#include <mcu/vajra_hal.h>
+#include <mcu/parashu_hal.h>
 
 #define SPI0_OFFSET 0x00000000
 #define SPI1_OFFSET 0x00000100
@@ -88,26 +88,26 @@
 #define TXE		(1 << 1)
 #define RXNE		(1 << 0)
 
-static int vajra_flash_read(const struct hal_flash *dev, uint32_t address,
+static int parashu_flash_read(const struct hal_flash *dev, uint32_t address,
         void *dst, uint32_t num_bytes);
-static int vajra_flash_write(const struct hal_flash *dev, uint32_t address,
+static int parashu_flash_write(const struct hal_flash *dev, uint32_t address,
         const void *src, uint32_t num_bytes);
-static int vajra_flash_erase_sector(const struct hal_flash *dev,
+static int parashu_flash_erase_sector(const struct hal_flash *dev,
         uint32_t sector_address);
-static int vajra_flash_sector_info(const struct hal_flash *dev, int idx,
+static int parashu_flash_sector_info(const struct hal_flash *dev, int idx,
         uint32_t *address, uint32_t *sz);
-static int vajra_flash_init(const struct hal_flash *dev);
+static int parashu_flash_init(const struct hal_flash *dev);
 
-static const struct hal_flash_funcs vajra_flash_funcs = {
-    .hff_read = vajra_flash_read,
-    .hff_write = vajra_flash_write,
-    .hff_erase_sector = vajra_flash_erase_sector,
-    .hff_sector_info = vajra_flash_sector_info,
-    .hff_init = vajra_flash_init
+static const struct hal_flash_funcs parashu_flash_funcs = {
+    .hff_read = parashu_flash_read,
+    .hff_write = parashu_flash_write,
+    .hff_erase_sector = parashu_flash_erase_sector,
+    .hff_sector_info = parashu_flash_sector_info,
+    .hff_init = parashu_flash_init
 };
 
-const struct hal_flash vajra_flash_dev = {
-    .hf_itf = &vajra_flash_funcs,
+const struct hal_flash parashu_flash_dev = {
+    .hf_itf = &parashu_flash_funcs,
     .hf_base_addr = 0x0,
     .hf_size = 0x1000,  /* XXX read from factory info? */
     .hf_sector_cnt = 0x100,       /* XXX read from factory info? */
@@ -126,61 +126,61 @@ const struct hal_flash vajra_flash_dev = {
 // XXX All flash functions are stubbed
 
 static int
-vajra_flash_read(const struct hal_flash *dev, uint32_t address, void *dst,
+parashu_flash_read(const struct hal_flash *dev, uint32_t address, void *dst,
         uint32_t num_bytes){
     memset(dst, 0xFF, num_bytes);
     return 0;
 }
 
-// static int __attribute((section(".ram_text.vajra_flash_transmit")))
-// vajra_flash_transmit(uint8_t out_byte){
+// static int __attribute((section(".ram_text.parashu_flash_transmit")))
+// parashu_flash_transmit(uint8_t out_byte){
 //   return 0;
 // }
 //
-// static int __attribute((section(".ram_text.vajra_flash_fifo_put")))
-// vajra_flash_fifo_put(uint8_t out_byte){
+// static int __attribute((section(".ram_text.parashu_flash_fifo_put")))
+// parashu_flash_fifo_put(uint8_t out_byte){
 //     return 0;
 // }
 //
-// static int __attribute((section(".ram_text.vajra_flash_fifo_write")))
-// vajra_flash_fifo_write(const uint8_t *ptr, int count){
+// static int __attribute((section(".ram_text.parashu_flash_fifo_write")))
+// parashu_flash_fifo_write(const uint8_t *ptr, int count){
 //     return 0;
 // }
 //
-// static int __attribute((section(".ram_text.vajra_flash_wait_till_ready")))
-// vajra_flash_wait_till_ready(void){
+// static int __attribute((section(".ram_text.parashu_flash_wait_till_ready")))
+// parashu_flash_wait_till_ready(void){
 //     return 0;
 // }
 //
-// static int __attribute((section(".ram_text.vajra_flash_write_enable")))
-// vajra_flash_write_enable(void){
+// static int __attribute((section(".ram_text.parashu_flash_write_enable")))
+// parashu_flash_write_enable(void){
 //     return 0;
 // }
 //
-// static int  __attribute((section(".ram_text.vajra_flash_write_page"))) __attribute((noinline))
-// vajra_flash_write_page(const struct hal_flash *dev, uint32_t address,
+// static int  __attribute((section(".ram_text.parashu_flash_write_page"))) __attribute((noinline))
+// parashu_flash_write_page(const struct hal_flash *dev, uint32_t address,
 //                       const void *src, uint32_t num_bytes){
 //    return 0;
 // }
 
 static int
-vajra_flash_write(const struct hal_flash *dev, uint32_t address,
+parashu_flash_write(const struct hal_flash *dev, uint32_t address,
         const void *src, uint32_t num_bytes){
    return 0;
 }
 
-static int __attribute((section(".ram_text.vajra_flash_erase_sector"))) __attribute((noinline))
-vajra_flash_erase_sector(const struct hal_flash *dev, uint32_t sector_address){
+static int __attribute((section(".ram_text.parashu_flash_erase_sector"))) __attribute((noinline))
+parashu_flash_erase_sector(const struct hal_flash *dev, uint32_t sector_address){
     return 0;
 }
 
 static int
-vajra_flash_sector_info(const struct hal_flash *dev, int idx,
+parashu_flash_sector_info(const struct hal_flash *dev, int idx,
         uint32_t *address, uint32_t *sz){
    return 0;
 }
 
 static int
-vajra_flash_init(const struct hal_flash *dev){
+parashu_flash_init(const struct hal_flash *dev){
     return 0;
 }

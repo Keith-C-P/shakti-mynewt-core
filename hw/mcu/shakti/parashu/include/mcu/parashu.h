@@ -17,8 +17,8 @@
  * under the License.
  */
 
-#ifndef __MCU_VAJRA_H__
-#define __MCU_VAJRA_H__
+#ifndef __MCU_PARASHU_H__
+#define __MCU_PARASHU_H__
 
 /*
  * This is include is just so OS_TICKS_PER_SEC can be taken from
@@ -40,4 +40,4 @@ hal_debug_break(void)
 }
 #endif
 
-#endif /* __MCU_VAJRA_H__ */
+#endif /* __MCU_PARSHU_H__ */

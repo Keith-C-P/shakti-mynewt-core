@@ -69,7 +69,7 @@ uint64_t get_timer_value()
 {
 
 #if __riscv_xlen == 64
-   return ( ((uint64_t)mtime_high() << 32) | mtime_low());
+    return ( ((uint64_t)mtime_high() << 32) | mtime_low());
 #else
   return mtime_low();
 #endif

@@ -1,8 +1,8 @@
 /*
-platform.h - header file for vajra C class SoC on artix7_100t
+platform.h - header file for pinaka E class SoC on artix7_35t
 
-* Name of Author  : Sathya Narayanan N
-* Email ID        : sathya281@gmail.com
+* Name of Author : Sathya Narayanan N
+* Email ID       : sathya281@gmail.com
 
  Copyright (C) 2020  IIT Madras. All rights reserved.
 
@@ -19,7 +19,7 @@ platform.h - header file for vajra C class SoC on artix7_100t
  You should have received a copy of the GNU General Public License
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
-/*********c-rv64imacsu-100t*********
+/******	e-rv32imac-35t ********
  SPI   * 2
  GPIO  * 32
  UART  * 3
@@ -27,37 +27,40 @@ platform.h - header file for vajra C class SoC on artix7_100t
  PLIC  * 1
  CLINT * 1
  XADC  * 1
- DDR   : 256MB
+ BRAM  : 128kiB
  Boot
  PWM   * 6
  pinmux
-************************************/
-#ifdef __cplusplus
-extern C {
-# endif
+********************************/
+   
 
 #ifndef PLATFORM_H
 #define PLATFORM_H
 
-#include <inttypes.h>
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /*
- *@brief RISCV - C CLASS SOC Memory mapping
+ *@brief RISCV - E CLASS SOC Memory mapping
  */
 
 /*! Core Local Interruptor CLINT */
 #define CLINT_BASE 0x020000000
 #define MTIME      0x0200BFF8
 #define MTIMECMP   0x02004000
-#define CLINT_DIVISOR   256
+#define CLINT_DIVISOR   16
 
 #define CLOCK_FREQUENCY 50000000
 
 /*!Debugger Offset */
 #define DBG_MEM_START 0x00000010
 
-/*!Tightly Coupled Memory(TCM) Offset. Size 256mB */
+/*!Tightly Coupled Memory(TCM) Offset. Size 128kB */
 #define TCM_MEM_START 0x80000000 /*! DDR3 Memory Start address */
-#define TCM_MEM_SIZE 0x10000000 /*! DDR3 Memory Size */
+
+/*!Tightly Coupled Memory(TCM) Size. Size 128kB */
+#define TCM_MEM_SIZE 0x20000 /*! DDR3 Memory Size */
 
 /*!Percentage of Free Memory to be used as stack (0-100). The remaining space will be used by heap */
 #define STACK_PERCENTAGE 50 /*! DDR3 Memory Size */
@@ -85,9 +88,6 @@ extern C {
 
 /*! Xilinx Analog to Digital converter */
 #define XADC_BASE_ADDRESS 0x00041000
-
-/*!Ethernet */
-#define ETHERNET_BASE 0x00044000
 
 /*! pinmux*/
 #define PINMUX_START 0x41500 
@@ -166,9 +166,6 @@ extern C {
 #define GPIO30 (1 << 30)
 #define GPIO31 (1 << 31)
 #define GPIO_COUNT  0x20
-
-extern uint8_t _ram_start;
-#define RAM_SIZE (16*1024)
 
 #ifdef __cplusplus
 }

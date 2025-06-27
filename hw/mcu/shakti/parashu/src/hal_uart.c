@@ -26,7 +26,7 @@ extern "C" {
 #include <inttypes.h>
 #include "hal/hal_uart.h"
 #include "bsp/bsp.h"
-#include "mcu/vajra_hal.h"
+#include "mcu/parashu_hal.h"
 
 #define STS_RX_THRESHOLD 0x1 << 8
 #define BREAK_ERROR 1 << 7
@@ -137,10 +137,10 @@ hal_uart_init_cbs(int port, hal_uart_tx_char tx_func, hal_uart_tx_done tx_done,
     return 0;
 }
 
-int hal_uart_init(int uart, __attribute__((unused)) void *cfg) {
-  if (uart > MAX_UART_COUNT) return -1;
+int hal_uart_init(int port, __attribute__((unused)) void *cfg) {
+  if (port > MAX_UART_COUNT) return -1;
 
-	uart_instances[uart] = (uart_struct*) (UART0_START + uart * UART_OFFSET);
+	uart_instances[port] = (uart_struct*) (UART0_START + port * UART_OFFSET);
   return 0;
 }
 
@@ -181,7 +181,7 @@ int hal_uart_close(int port) {
 }
 
 static int
-vajra_hal_uart_tx_fill_fifo(int port)
+parashu_hal_uart_tx_fill_fifo(int port)
 {
     if (port > MAX_UART_COUNT){
       return -1;
@@ -217,7 +217,7 @@ void hal_uart_start_tx(int port) {
   // __HAL_DISABLE_INTERRUPTS(sr); // TODO: IMPLEMENT __HAL_DISABLE_INTERRUPTS
   if (hal_uart->u_tx_started == 0) { 
       // UART0_REG(UART_REG_TXCTRL) |= UART_TXEN;
-      vajra_hal_uart_tx_fill_fifo(port);
+      parashu_hal_uart_tx_fill_fifo(port);
   }
   // __HAL_ENABLE_INTERRUPTS(sr);
 }

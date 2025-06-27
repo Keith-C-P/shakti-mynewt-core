@@ -25,12 +25,14 @@
 #include <flash_map/flash_map.h>
 #include <hal/hal_bsp.h>
 #include <hal/hal_flash.h>
-#include <mcu/vajra_hal.h>
+#include <mcu/parashu_hal.h>
 #include <bsp/bsp.h>
 #if MYNEWT_VAL(SPIFLASH)
 #include <spiflash/spiflash.h>
 #endif
 
+extern uint8_t _ram_start;
+#define RAM_SIZE (16 * 1024) // or use extern if it's in linker script
 /*
  * What memory to include in coredump.
  */
@@ -54,7 +56,7 @@ struct bus_spi_node_cfg flash_spi_cfg = {
 #endif
 
 static const struct hal_flash *flash_devs[] = {
-    [0] = &vajra_flash_dev,
+    [0] = &parashu_flash_dev,
 #if MYNEWT_VAL(SPIFLASH)
     [1] = &spiflash_dev.hal,
 #endif

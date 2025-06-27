@@ -27,7 +27,7 @@ ENTRY(_start)
 MEMORY
 {
   /* flash (rxai!w) : ORIGIN = 0x20000000, LENGTH = 32K */
-  ram (wxa!ri) : ORIGIN = 0x80000000, LENGTH = 16K
+  ram (wxa!ri) : ORIGIN = 0x80000000, LENGTH = 128K
 }
 
 SECTIONS
@@ -39,6 +39,8 @@ SECTIONS
   .text : {
     *(.text) 
   } >ram
+
+  _ram_start=ORIGIN(ram);
 
   .rodata : 
   {
@@ -122,5 +124,4 @@ SECTIONS
     _heap_end = .;
   } >ram
 
-  _ram_start=ORIGIN(ram);
 }

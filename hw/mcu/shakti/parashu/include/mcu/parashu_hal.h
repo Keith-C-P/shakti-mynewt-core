@@ -17,8 +17,8 @@
  * under the License.
  */
 
-#ifndef H_VAJRA_HAL_
-#define H_VAJRA_HAL_
+#ifndef H_PARASHU_HAL_
+#define H_PARASHU_HAL_
 
 #include <stdint.h>
 // #include <env/encoding.h>
@@ -41,7 +41,7 @@
         }                                                  \
     } while(0);
 */
-extern const struct hal_flash vajra_flash_dev;
+extern const struct hal_flash parashu_flash_dev;
 
 void hal_uart_sys_clock_changed(void);
 
