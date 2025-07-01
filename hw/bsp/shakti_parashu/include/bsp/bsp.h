@@ -49,6 +49,7 @@ extern "C" {
 #define MTIME      0x0200BFF8
 #define MTIMECMP   0x02004000
 #define CLINT_DIVISOR   256
+#define CLINT_MSIP 0x000
 
 #define CLOCK_FREQUENCY 50000000
 
@@ -166,6 +167,24 @@ extern "C" {
 
 #define PLIC_NUM_INTERRUPTS 52
 #define PLIC_NUM_PRIORITIES 7
+
+/* Helper Functions */
+#define _REG32(p, i) (*(volatile uint32_t *) ((p) + (i)))
+#define _REG32P(p, i) ((volatile uint32_t *) ((p) + (i)))
+#define AON_REG(offset) _REG32(AON_CTRL_ADDR, offset)
+#define CLINT_REG(offset) _REG32(CLINT_BASE, offset)
+#define GPIO_REG(offset) _REG32(GPIO_CTRL_ADDR, offset)
+#define OTP_REG(offset)  _REG32(OTP_CTRL_ADDR, offset)
+#define PLIC_REG(offset) _REG32(PLIC_BASE_ADDRESS, offset)
+#define PRCI_REG(offset) _REG32(PRCI_CTRL_ADDR, offset)
+#define PWM0_REG(offset) _REG32(PWM0_CTRL_ADDR, offset)
+#define PWM1_REG(offset) _REG32(PWM1_CTRL_ADDR, offset)
+#define PWM2_REG(offset) _REG32(PWM2_CTRL_ADDR, offset)
+#define SPI0_REG(offset) _REG32(SPI0_CTRL_ADDR, offset)
+#define SPI1_REG(offset) _REG32(SPI1_CTRL_ADDR, offset)
+#define SPI2_REG(offset) _REG32(SPI2_CTRL_ADDR, offset)
+#define UART0_REG(offset) _REG32(UART0_CTRL_ADDR, offset)
+#define UART1_REG(offset) _REG32(UART1_CTRL_ADDR, offset)
 
 #ifdef __cplusplus
 }

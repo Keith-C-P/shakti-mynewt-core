@@ -61,9 +61,9 @@ syscfg.defs:
     UART_0:
         description: 'Whether to enable UART0'
         value:  1
-#     OS_TICKLESS_SLEEP:
-#         description: 'Enable tickless sleep'
-#         value: 1
+    OS_TICKLESS_SLEEP:
+        description: 'Enable tickless sleep'
+        value: 1
 #     HAL_SYSTEM_RESET_FULL:
 #         description: >
 #             When set to 1, hal_system_reset() reboots by jumping to start of flash.
