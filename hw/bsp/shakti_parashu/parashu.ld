@@ -40,7 +40,7 @@ SECTIONS
     *(.text) 
   } >ram
 
-  _ram_start=ORIGIN(ram);
+  _ram_start = ORIGIN(ram);
 
   .rodata : 
   {
@@ -114,8 +114,8 @@ SECTIONS
   .stack : 
   {
     _stack_end = .;
-    __stack_pointer$ = .;
     _sp = .;
+    __stack_pointer$ = .;
     _stack = . - _STACK_SIZE;
   } >ram
 

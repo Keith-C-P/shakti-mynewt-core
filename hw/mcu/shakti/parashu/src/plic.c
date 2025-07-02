@@ -436,6 +436,7 @@ void configure_interrupt(uint32_t int_id)
 	// log_trace("configure_interrupt exited \n");
 }
 
+
 void
 external_interrupt_handler(__attribute__((unused)) uintptr_t mcause)
 {
