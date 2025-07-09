@@ -56,12 +56,12 @@ os_tick_init(uint32_t os_ticks_per_sec, int prio)
 void
 timer_interrupt_handler(void)
 {
-    int delta;
-    int ticks;
+    uint64_t delta;
+    uint32_t ticks;
     uint64_t time = get_timer_value();
 
-    delta = (int)(time - last_tick_time);
-    ticks = (int)(delta / ticks_per_ostick);
+    delta = (uint64_t)(time - last_tick_time);
+    ticks = (uint32_t)(delta / ticks_per_ostick);
 
     last_tick_time += ticks * ticks_per_ostick;
 

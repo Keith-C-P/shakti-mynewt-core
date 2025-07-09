@@ -124,6 +124,7 @@ extern mtrap_fptr_t mcause_trap_table[MAX_TRAP_VALUE];
 extern mtrap_fptr_t mcause_interrupt_table[MAX_INTERRUPT_VALUE];
 
 void default_handler(uintptr_t cause, uintptr_t epc);
+void timer_trap_handler(uintptr_t cause, uintptr_t epc);
 unsigned int extract_ie_code(unsigned int num);
 uintptr_t handle_trap(uintptr_t cause, uintptr_t epc);
 

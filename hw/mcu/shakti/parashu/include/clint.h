@@ -30,13 +30,10 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #define __CLIC_DRIVER_H__
 #include <inttypes.h>
 #include "traps.h"
-#include "mcu/platform.h"
-
-extern volatile uint64_t* mtime;
-extern volatile uint64_t* mtimecmp;
+#include "bsp/bsp.h"
 
 /* function prototype */
-uint64_t get_timer_value(void);
+uint32_t get_timer_value(void);
 void configure_counter(uint64_t value);
 void mach_clint_handler(uintptr_t int_id, uintptr_t epc);
 

@@ -33,7 +33,7 @@ Disable Xip for Aardonyx
 #include "traps.h"
 #include "clint.h"
 #include "plic.h"
-#include "mcu/platform.h"
+#include "bsp/bsp.h"
 #include "defines.h"
 #include "hal/hal_uart.h"
 
@@ -50,12 +50,6 @@ char *stack_start=(char *)&_stack;
 char *heap_start=(char *)&_heap;
 char *heap_end=(char *)&_heap_end;
 
-/** @fn void section_init()
- * @brief resets the different sections
- * @details Explicitly 0x0 or 0xffffffff is written all the addresses in different "write" sections of memory
- * @warning takes long time. so the caller is diabled as of now
- */
-
 /** @fn void trap_init()
  * @brief Initialize the trap/interrupt callback routines with user defined handler.
  * @details Assign default handler for trap / interrupt that does not have user defined
@@ -69,14 +63,14 @@ static void trap_init(void)
 	mcause_interrupt_table[SUPER_SW_INTERRUPT]       = default_handler;
 	mcause_interrupt_table[RESERVED_INTERRUPT0]      = default_handler;
 	mcause_interrupt_table[MACH_SW_INTERRUPT]        = default_handler;
-	mcause_interrupt_table[USER_TIMER_INTERRUPT]     = default_handler;
-	mcause_interrupt_table[SUPER_TIMER_INTERRUPT]    = default_handler;
+	mcause_interrupt_table[USER_TIMER_INTERRUPT]     = timer_trap_handler;
+	mcause_interrupt_table[SUPER_TIMER_INTERRUPT]    = timer_trap_handler;
 	mcause_interrupt_table[RESERVED_INTERRUPT1]      = default_handler;
 	mcause_interrupt_table[MACH_TIMER_INTERRUPT]     = mach_clint_handler;
 	mcause_interrupt_table[USER_EXT_INTERRUPT]       = default_handler;
 	mcause_interrupt_table[SUPERVISOR_EXT_INTERRUPT] = default_handler;
 	mcause_interrupt_table[RESERVED_INTERRUPT2]      = default_handler;
-	mcause_interrupt_table[MACH_EXTERNAL_INTERRUPT]  = mach_plic_handler; //XXX CHANGE TO mach_plic_handler when implemented
+	mcause_interrupt_table[MACH_EXTERNAL_INTERRUPT]  = mach_plic_handler;
 	mcause_interrupt_table[RESERVED_INTERRUPT3]      = default_handler;
 	mcause_interrupt_table[RESERVED_INTERRUPT4]      = default_handler;
 	mcause_interrupt_table[RESERVED_INTERRUPT5]      = default_handler;
@@ -118,22 +112,19 @@ static void trap_init(void)
 	// log_trace("trap_init exited \n ");
 }
 
-/** @fn void init(void)
+/** @fn void SystemInit(void)
  * @brief initialize the necessary variables for system start
  */
-void init(void)
+void SystemInit(void)
 {
-//	section_init(); // uncomment on need basis
 	hal_uart_init(0, 0);
-
 	// log_trace("init entered \n ");
-
-#ifdef AARDONYX
-	micron_disable_xip_volatile(0,0);
-	flashMemInit();
-#endif
-
 	trap_init();
 
 	// log_trace("init exited\n");
+}
+
+void _fini(void)
+{
+
 }

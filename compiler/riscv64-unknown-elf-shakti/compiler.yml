@@ -29,7 +29,7 @@ compiler.flags.base: [-Wall, -Werror, -Wno-format-truncation, -ffunction-section
 compiler.flags.default: [compiler.flags.base, -O1, -ggdb]
 compiler.flags.optimized: [compiler.flags.base, -Os, -ggdb]
 compiler.flags.speed: [compiler.flags.base, -Ofast, -ggdb]
-compiler.flags.debug: [compiler.flags.base, -Og, -ggdb]
+compiler.flags.debug: [compiler.flags.base, -O0, -ggdb]
 
 compiler.as.flags: [-x assembler-with-cpp]
 

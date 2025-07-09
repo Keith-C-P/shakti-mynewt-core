@@ -17,8 +17,8 @@
  * under the License.
  */
 
-#ifndef _OS_ARCH_RV32IMAC_H
-#define _OS_ARCH_RV32IMAC_H
+#ifndef _OS_ARCH_SHAKTI_H
+#define _OS_ARCH_SHAKTI_H
 
 #include <stdint.h>
 #include "mcu/parashu.h"
@@ -49,6 +49,8 @@ os_arch_in_isr(void)
      */
     return 0;
 }
+
+
 
 #ifdef __cplusplus
 }

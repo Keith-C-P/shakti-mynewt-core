@@ -22,7 +22,7 @@
 
  ***************************************************************************/
 OUTPUT_ARCH( "riscv" )
-ENTRY(_start)
+ENTRY( _sys_start )
 
 MEMORY
 {
@@ -114,7 +114,7 @@ SECTIONS
   .stack : 
   {
     _stack_end = .;
-    _sp = .;
+    PROVIDE(_sp = .);
     __stack_pointer$ = .;
     _stack = . - _STACK_SIZE;
   } >ram

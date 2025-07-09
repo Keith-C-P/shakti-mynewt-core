@@ -28,6 +28,7 @@
 
 //TODO enable trace messages when log.h is implemented
 #include "traps.h"
+#include "bsp/bsp.h"
 
 mtrap_fptr_t mcause_trap_table[MAX_TRAP_VALUE];
 mtrap_fptr_t mcause_interrupt_table[MAX_INTERRUPT_VALUE];
@@ -58,8 +59,18 @@ unsigned int extract_ie_code(unsigned int num)
 void default_handler(__attribute__((unused)) uintptr_t mcause, __attribute__((unused)) uintptr_t epc)
 {
 	// log_trace("\ndefault_handler entered\n");
+	
+	// while(1);
 
-	while(1);
+	// log_trace("default_handler exited\n");
+}
+
+void timer_trap_handler(__attribute__((unused)) uintptr_t mcause, __attribute__((unused)) uintptr_t epc)
+{
+	// log_trace("\ndefault_handler entered\n");
+
+	CLINT_REG(MTIMECMP + 4) = -1;
+	CLINT_REG(MTIMECMP) = -1;
 
 	// log_trace("default_handler exited\n");
 }

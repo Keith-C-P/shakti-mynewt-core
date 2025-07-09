@@ -27,9 +27,6 @@
 #include <sys/types.h>
 #include <encoding.h>
 
-volatile uint64_t* mtime    =  (volatile uint64_t*)(uintptr_t)(MTIME);
-volatile uint64_t* mtimecmp =  (volatile uint64_t*)(uintptr_t)(MTIMECMP);
-
 extern void trap_entry();
 
 struct context_switch_frame {
@@ -71,13 +68,13 @@ struct context_switch_frame {
 uint32_t
 mtime_lo(void)
 {
-  return *(uint32_t *)(MTIME);
+  return *(uint32_t *)(CLINT_BASE + MTIME);
 }
 
 uint32_t
 mtime_hi(void)
 {
-  return *(volatile uint32_t *)(MTIME + 4);
+  return *(volatile uint32_t *)(CLINT_BASE+ MTIME + 4);
 }
 
 uint64_t
@@ -94,12 +91,10 @@ get_timer_value(void)
 void
 set_mtimecmp(uint64_t time)
 {
-    volatile uint32_t* mtimecmp_lo = (volatile uint32_t*) mtimecmp;
-    volatile uint32_t* mtimecmp_hi = (volatile uint32_t*) mtimecmp + 1;
-
-    *mtimecmp_hi = -1;
-    *mtimecmp_lo = (u_int32_t) time;
-    *mtimecmp_hi = (u_int32_t) (time >> 32);
+    CLINT_REG(MTIMECMP + 4) = -1;
+    // CLINT_REG(MTIMECMP) = (uint32_t) time;
+    CLINT_REG(MTIMECMP) = -1;
+    // CLINT_REG(MTIMECMP + 4) = (uint32_t) (time >> 32);
 }
 
 unsigned long
@@ -247,9 +242,9 @@ os_arch_start(void)
 
     /* Clean software interrupt, and enable it */
     CLINT_REG(CLINT_MSIP) = 0;
-    set_csr(mie, MIP_MSIP);
+    // set_csr(mie, MIP_MSIP);
     /* Enable external interrupts */
-    set_csr(mie, MIP_MEIP);
+    // set_csr(mie, MIP_MEIP);
 
     /* Intitialize and start system clock timer, this enable timer interrupt */
     os_tick_init(OS_TICKS_PER_SEC, OS_TICK_PRIO);

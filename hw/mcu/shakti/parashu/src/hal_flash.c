@@ -128,8 +128,8 @@ const struct hal_flash parashu_flash_dev = {
 static int
 parashu_flash_read(const struct hal_flash *dev, uint32_t address, void *dst,
         uint32_t num_bytes){
-    memset(dst, 0xFF, num_bytes);
-    return 0;
+//     memset(dst, 0xFF, num_bytes);
+    return 2;
 }
 
 // static int __attribute((section(".ram_text.parashu_flash_transmit")))

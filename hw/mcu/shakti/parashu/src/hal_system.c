@@ -27,6 +27,7 @@
 
 #ifndef H_HAL_SYSTEM_
 #define H_HAL_SYSTEM_
+#include "os/mynewt.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -56,15 +57,21 @@ enum hal_reset_reason {
 // enum hal_reset_reason hal_reset_cause(void)
 
 
-
-
 /**
  * System reset.
- */
+*/
 void hal_system_reset(void)
 {
-  
-} 
+    extern void _sys_start(void);
+    #if MYNEWT_VAL(HAL_SYSTEM_RESET_CB)
+        hal_system_reset_cb();
+    #endif
+
+    while (1)
+    {
+      _sys_start();
+    }
+}
 
 /**
  * Called by bootloader to start loaded program.

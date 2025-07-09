@@ -45,9 +45,9 @@ extern "C" {
 #endif
 
 /*! Core Local Interruptor CLINT */
-#define CLINT_BASE 0x020000000
-#define MTIME      0x0200BFF8
-#define MTIMECMP   0x02004000
+#define CLINT_BASE 0x2000000
+#define MTIME      0xBFF8
+#define MTIMECMP   0x4000
 #define CLINT_DIVISOR   256
 #define CLINT_MSIP 0x000
 

@@ -31,66 +31,22 @@ interrupt handler, configure the counter and support for e and c class clint tim
 #include "clint.h"
 #include "bsp/bsp.h"
 
-volatile uint64_t* mtime    =  (volatile uint64_t*) (MTIME);
-volatile uint64_t* mtimecmp =  (volatile uint64_t*) (MTIMECMP);
-
-/** @fn static unsigned long mtime_low( )
- * @brief return the lower 32bit of mtime.
- * @details return the lower half of mtime. And this is needed mostly in dealing mtime in 32 bit machines.
- * @return unsigned long
- */
-static uint32_t mtime_low(void)
-{
-  return *(uint32_t *)(MTIME);
-}
-
-/*
-Get each 32 bit and append for full timer value
-*/
-
-/** @fn static uint32_t mtime_high(void)
- * @brief return the upper 32 bit of mtime
- * @details return the upper 32 bit of mtime register. This is very useful incase of 32 bit core.
- *          Incase of 64 bit core this has to be appended with lower 32 bits adn sent.
- * @return unsigned 32bit int
- */
-// static uint32_t mtime_high(void)
-// {
-//   return *(volatile uint32_t *)(MTIME + 4);
-// }
-
-/** @fn uint64_t get_timer_value()
- * @brief return the mtime value for a 32 bit or 64 bit machine
- * @details return the mtime value based on the __riscv_xlen. Incase of 64 bit, this joins the upper
- *          and lower 32 bits of mtime and return
- * @return unsigned 64bit int
- */
-uint64_t get_timer_value()
-{
-
-#if __riscv_xlen == 64
-    return ( ((uint64_t)mtime_high() << 32) | mtime_low());
-#else
-  return mtime_low();
-#endif
-}
-
 /** @fn void configure_counter( uint64_t value)
  * @brief sets up the timer
  * @details sets the mtimecmp to current mtime + delta
  * @param unsigned 64bit int (delta value after which interrupt happens)
  */
-void configure_counter( uint64_t value)
-{
-	// log_trace("\nconfigure_counter entered\n");
-
-	*mtimecmp = *mtime + value;
-
-	// log_debug("mtimecmp value = %d\n", *mtimecmp);
-	// log_debug("mtime value = %d\n", *mtime);
-
-	// log_trace("\nconfigure_counter exited\n");
-}
+// void configure_counter( uint64_t value)
+// {
+// 	// log_trace("\nconfigure_counter entered\n");
+//
+// 	*mtimecmp = *mtime + value;
+//
+// 	// log_debug("mtimecmp value = %d\n", *mtimecmp);
+// 	// log_debug("mtime value = %d\n", *mtime);
+//
+// 	// log_trace("\nconfigure_counter exited\n");
+// }
 
 /** @fn void mach_clint_handler(uintptr_t int_id, uintptr_t epc)
  * @brief handler for machine timer interrupt
@@ -103,7 +59,8 @@ void mach_clint_handler( __attribute__((unused)) uintptr_t int_id,  __attribute_
 	// log_trace("\nmach_clint_handler entered\n");
 
 	//set mtimecmp to some value. On appln reqt basis handle timer interrupt
-	*mtimecmp = -1;
+	CLINT_REG(MTIMECMP + 4) = -1;
+	CLINT_REG(MTIMECMP) = -1;
 
 	// log_info("Timer interrupt handled \n");
 

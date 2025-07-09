@@ -24,7 +24,7 @@ pkg.author: "Keith C Pereira<keithcpereira@gmail.com>"
 pkg.homepage: "http://mynewt.apache.org/"
 pkg.keywords:
     - riscv
-    - riscv64
+    - riscv32
     - compiler
     - gcc
     - rv32imac
