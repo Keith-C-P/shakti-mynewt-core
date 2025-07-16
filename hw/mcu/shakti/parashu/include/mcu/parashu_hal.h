@@ -45,8 +45,6 @@ extern const struct hal_flash parashu_flash_dev;
 
 void hal_uart_sys_clock_changed(void);
 
-#define FE310_SPI_FIFO_LENGTH 8
-
 #ifdef __cplusplus
 }
 #endif

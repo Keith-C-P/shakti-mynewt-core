@@ -100,27 +100,26 @@ li  x31,0
 la gp, __global_pointer$
 .option pop
 
-init_bss:
-    /* init bss section */
-    la	a0, __bss_start
-    la	a1, __bss_end /* section end is actually the start of the next section */
-    li	a2, 0x0
-  1:
-    sw		a2, 0(a0)
-    bgeu	a0, a1, init_sbss
-    addi	a0, a0, 4
-    j	        1b
+/* init bss section */
+la	a0, __bss_start
+la	a1, __bss_end-4 /* section end is actually the start of the next section */
+li	a2, 0x0
+1:
+  sw		a2, 0(a0)
+  bgeu	a0, a1, 1f
+  addi	a0, a0, 4
+  j	        1b
 
-init_sbss:
-    /* init sbss section */
-    la	a0, __sbss_start
-    la	a1, __sbss_end-4 /* section end is actually the start of the next section */
-    li	a2, 0x0
-   1:
-    sw		a2, 0(a0)
-    bgeu	a0, a1, 1f
-    addi	a0, a0, 4
-    j	        1b
+1:
+/* init sbss section */
+la	a0, __sbss_start
+la	a1, __sbss_end-4 /* section end is actually the start of the next section */
+li	a2, 0x0
+1:
+  sw		a2, 0(a0)
+  bgeu	a0, a1, 1f
+  addi	a0, a0, 4
+  j	        1b
 
 1:
 # initialize stack pointer

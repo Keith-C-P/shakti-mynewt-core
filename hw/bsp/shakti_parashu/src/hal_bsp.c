@@ -31,14 +31,10 @@
 #include <spiflash/spiflash.h>
 #endif
 
-#if MYNEWT_VAL(UART_0)
 #include "uart/uart.h"
 #include "uart_hal/uart_hal.h"
-#endif
+#include "uart.h"
 
-#if MYNEWT_VAL(UART_0)
-static struct uart_dev os_bsp_uart0;
-#endif
 
 extern uint8_t _ram_start;
 #define RAM_SIZE (16 * 1024) // or use extern if it's in linker script
@@ -88,20 +84,7 @@ hal_bsp_core_dump(int *area_cnt)
     return dump_cfg;
 }
 
-/*
-* Creating UART for the HAL itself
-*/
-static void
-parashu_periph_create_uart(void)
-{
-#if MYNEWT_VAL(UART_0)
-    int rc;
 
-    rc = os_dev_create((struct os_dev *)&os_bsp_uart0, "uart0",
-                       OS_DEV_INIT_PRIMARY, 0, uart_hal_init, NULL);
-    assert(rc == 0);
-#endif
-}
 
 void
 hal_bsp_init(void)

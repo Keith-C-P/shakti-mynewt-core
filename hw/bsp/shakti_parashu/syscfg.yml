@@ -18,6 +18,7 @@
 #
 
 syscfg.vals:
+    CONSOLE_UART_BAUD: 19200
     # XTAL_32768: 1
     # SYS_CLOCK: HFXOSC_PLL_256_MHZ
     UART_0: 1

@@ -35,7 +35,7 @@ Disable Xip for Aardonyx
 #include "plic.h"
 #include "bsp/bsp.h"
 #include "defines.h"
-#include "hal/hal_uart.h"
+#include "uart.h"
 
 extern void init(void);
 extern void trap_entry(void);
@@ -117,7 +117,7 @@ static void trap_init(void)
  */
 void SystemInit(void)
 {
-	hal_uart_init(0, 0);
+	uart_init();
 	// log_trace("init entered \n ");
 	trap_init();
 
@@ -126,5 +126,5 @@ void SystemInit(void)
 
 void _fini(void)
 {
-
+	//wow whole lotta nothin ig
 }
