@@ -242,9 +242,9 @@ os_arch_start(void)
 
     /* Clean software interrupt, and enable it */
     CLINT_REG(CLINT_MSIP) = 0;
-    // set_csr(mie, MIP_MSIP);
+    set_csr(mie, MIP_MSIP);
     /* Enable external interrupts */
-    // set_csr(mie, MIP_MEIP);
+    set_csr(mie, MIP_MEIP);
 
     /* Intitialize and start system clock timer, this enable timer interrupt */
     os_tick_init(OS_TICKS_PER_SEC, OS_TICK_PRIO);
